@@ -1,6 +1,6 @@
 
 
-
+import UserChatCard from "../components/UserChatCard"
 
 function FormPath() {
     return (<div>
@@ -19,41 +19,11 @@ function FormPath() {
                                 <h6 className="text-gray-500 text-xs font-normal leading-4 py-1">05:14 PM</h6>
                             </div>
                         </div>
-                        <div className="w-max grid">
-                            <div className="px-3.5 py-2 bg-gray-100 rounded justify-start items-center gap-3 inline-flex">
-                                <h5 className="text-gray-900 text-sm font-normal leading-snug">Let me know</h5>
-                            </div>
-                            <div className="justify-end items-center inline-flex mb-2.5">
-                                <h6 className="text-gray-500 text-xs font-normal leading-4 py-1">05:14 PM</h6>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-            <div className="flex gap-2.5 justify-end pb-40">
-                <div className="">
-                    <div className="grid mb-2">
-                        <h5 className="text-right text-gray-900 text-sm font-semibold leading-snug pb-1">You</h5>
-                        <div className="px-3 py-2 bg-indigo-600 rounded">
-                            <h2 className="text-white text-sm font-normal leading-snug">Yes, let’s see, send your work here</h2>
-                        </div>
-                        <div className="justify-start items-center inline-flex">
-                            <h3 className="text-gray-500 text-xs font-normal leading-4 py-1">05:14 PM</h3>
-                        </div>
-                    </div>
-                    <div className="justify-center">
-                        <div className="grid w-fit ml-auto">
-                            <div className="px-3 py-2 bg-indigo-600 rounded ">
-                                <h2 className="text-white text-sm font-normal leading-snug">Anyone on for lunch today</h2>
-                            </div>
-                            <div className="justify-start items-center inline-flex">
-                                <h3 className="text-gray-500 text-xs font-normal leading-4 py-1">You</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <img src="https://pagedone.io/asset/uploads/1704091591.png" alt="Hailey image" className="w-10 h-11" />
-            </div>
+            <UserChatCard></UserChatCard>
             <div className="w-full pl-3 pr-1 py-1 rounded-3xl border border-gray-200 items-center gap-2 inline-flex justify-between">
                 <div className="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
