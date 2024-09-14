@@ -1,7 +1,7 @@
-
+import FormPath from '../screens/FormPath'
 const Road = () => {
   return (
-    <div>Road</div>
+    <FormPath></FormPath>
   )
 }
 
