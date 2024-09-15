@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type Route = {
   path: string;
   name: string;
@@ -67,5 +69,8 @@ export type APIResponse = {
 };
 
 // Context Type for userContext
-export type UserContextType = APIResponse | null;
+export type UserContextType = {
+  setData: Dispatch<SetStateAction<UserDataResponse>>;
+  data: UserDataResponse
+};
 

@@ -1,7 +1,7 @@
-import { NodeInfo } from '../constants/types';
+import { Plan } from '../constants/types';
 import Node from './Node';
 
-const NodeRoad = ({ nodes }: { nodes: NodeInfo[] }) => {
+const NodeRoad = ({ nodes }: { nodes: Plan[] }) => {
   return (
     <div className='flex flex-col items-start'>
       {nodes.map((node, index) => (

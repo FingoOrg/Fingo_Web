@@ -3,62 +3,105 @@ import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
-  DialogTitle,
 } from '@headlessui/react';
-import { NodeInfo } from '../constants/types';
+import {  Plan } from '../constants/types';
+import { useContext } from 'react';
+import { userContext } from '../context/UserContext';
 
 const NodeDialog = ({
   isOpen,
   close,
   node,
+  shouldDisable
 }: {
   isOpen: boolean;
   close: () => void;
-  node: NodeInfo;
+  node: Plan;
+  shouldDisable: boolean;
 }) => {
+
+  const isCompleted = node.status;
+  const {data } = useContext(userContext)
+  const handleComplete = async () => {
+    try {
+      const reqData = {
+        'completed_id': node.id,
+        "path_info": data.data.find((item) => item.path_id === data.activePath)
+      }
+      // Envía los datos a la API
+      const apiResponse = await fetch('https://da5cms9i64.execute-api.us-west-2.amazonaws.com/dev/api/financial-path', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(reqData) // Convierte el objeto data a una cadena JSON
+      });
+
+      window.location.reload()
+
+  if (!apiResponse.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const responseData = await apiResponse.json();
+  console.log('Success:', responseData);
+} catch (error) {
+  console.error('Error:', error);
+}
+  }
+
   return (
-    <>
       <Dialog
         transition
         open={isOpen}
         as="div"
-        className="relative z-10 focus:outline-none"
+        className="relative z-50 focus:outline-none"
         onClose={close}
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4">
+          <div className="flex min-h-full items-center justify-center p-1">
             <DialogPanel
               transition
-              className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full max-w-md rounded-xl flex flex-col items-center bg-white p-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
-              <DialogTitle
-                as="h3"
-                className="text-base/7 font-medium text-white"
-              >
-                {node.title}
-              </DialogTitle>
-              <p className="mt-2 text-sm/6 text-white/50">{node.description}</p>
-              <div className="mt-10 flex flex-row justify-between w-full px-10">
+              <p className={`${isCompleted ? "text-primary" : "text-black"} text-xl font-bold text-center `}>{node.title}</p>
+              <p className='mt-2'>
+                <span className={`${isCompleted ? "text-primary" : "text-black"} text-md font-medium`}>Due date: </span>
+                <span className={` text-md`}>{node.due_date}</span>
+              </p>
+              <p className="mt-2 text-sm/6 text-black">{node.description}</p>
+              <p className="mt-2 self-start">
+                Save{isCompleted ? 'd' : ''}:
+              </p>
+              <p className={`${isCompleted ? "text-primary" : "text-black"} mt-2 text-5xl font-bold`}>
+                ${node.amount.toLocaleString('en-US')} MXN
+              </p>
+
+              {shouldDisable && <p className="mt-2 text-sm/6 text-red-800">Complete the previous steps to unlock this one</p>}
+
+              <div className="mt-10 flex flex-row justify-between w-full px-5 gap-4">
+                {!isCompleted && (
+                  <Button
+                    className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                    onClick={close}
+                  >
+                    Close
+                  </Button>
+                )}
                 <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-red-500 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={close}
+                  className={`${shouldDisable ? "bg-black/40" : "bg-primary"} items-center w-full rounded-md py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700`}
+                  onClick={handleComplete}
+                  disabled={shouldDisable || isCompleted}
                 >
-                  Cerrar
-                </Button>
-                <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-primary py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={close}
-                >
-                  Completar
+                  Complete
                 </Button>
               </div>
             </DialogPanel>
           </div>
         </div>
       </Dialog>
-    </>
   );
 };
 
