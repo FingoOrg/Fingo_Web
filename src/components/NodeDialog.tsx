@@ -7,6 +7,7 @@ import {
 import {  Plan } from '../constants/types';
 import { useContext } from 'react';
 import { userContext } from '../context/UserContext';
+import { updateFrontData } from '../services/updateFrontData';
 
 const NodeDialog = ({
   isOpen,
@@ -21,7 +22,7 @@ const NodeDialog = ({
 }) => {
 
   const isCompleted = node.status;
-  const {data } = useContext(userContext)
+  const {data, setData } = useContext(userContext)
   const handleComplete = async () => {
     try {
       const reqData = {
@@ -37,7 +38,10 @@ const NodeDialog = ({
           body: JSON.stringify(reqData) // Convierte el objeto data a una cadena JSON
       });
 
-      window.location.reload()
+      if(apiResponse.status === 200) {
+        await updateFrontData(setData, data)
+        close()
+      }
 
   if (!apiResponse.ok) {
     throw new Error('Network response was not ok');

@@ -52,7 +52,7 @@ const ChoosePath = () => {
         <MenuItems anchor='bottom' className="flex flex-col gap-y-5 bg-white z-50 rounded-2xl mt-2 w-11/12 shadow-xl p-4 text-black text-xl">
             {paths && paths.map((path, index) => (
                 <MenuItem>
-                    <button className={`${isActive(path.path_id) ? "text-primary" : "text-black"} bg-white text-xl font-bold`} onClick={() => changePath(path.path_id)} >
+                    <button key={index} className={`${isActive(path.path_id) ? "text-primary" : "text-black"} bg-white text-xl font-bold`} onClick={() => changePath(path.path_id)} >
                         Financial Path #{index + 1}
                     </button>
                 </MenuItem>
