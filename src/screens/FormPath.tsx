@@ -126,7 +126,7 @@ function FormPath() {
     <div className="flex flex-col w-full h-screen justify-end">
       <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
         <img
-          src="./src/assets/capifin.jpg"
+          src="./assets/capifin.jpg"
           alt="Profile"
           className="w-20 aspect-square object-cover rounded-full"
         />

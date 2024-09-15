@@ -8,7 +8,7 @@ const BotChatCard: React.FC<{
       <div className="flex flex-row items-end">
         <div className="flex h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
           <img
-            src="./src/assets/capifin.jpg"
+            src="./assets/capifin.jpg"
             alt="Profile"
             className="w-full h-full object-cover rounded-full"
           />

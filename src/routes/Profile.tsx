@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import InvestMoneyIcon from '../assets/icons/InvestMoneyIcon';
-import MoneyPigIcon from '../assets/icons/MoneyPigIcon';
+import InvestMoneyIcon from '../../public/assets/icons/InvestMoneyIcon';
+import MoneyPigIcon from '../../public/assets/icons/MoneyPigIcon';
 import Badge from '../components/Badge';
 import { userContext } from '../context/UserContext';
 
 import GoldMedalIcon from '../components/GoldMedalIcon';
-import Axy from '../assets/Axy.webp';
+import Axy from '../../public/assets/Axy.webp';
 
 const Profile = () => {
   const { data } = useContext(userContext);
