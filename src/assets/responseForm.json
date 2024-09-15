@@ -1,68 +1,64 @@
-
 {
-
-    "form_data": [
-      {
-        "position": 0,
-        "question": "¿Cuántos años tienes?",
-        "answer": "Tengo 35 años."
-      },
-      {
-        "position": 1,
-        "question": "¿Cuándo planeas jubilarte?",
-        "answer": "Planeo jubilarme alrededor de los 65 años."
-      },
-      {
-        "position": 2,
-        "question": "¿Cuál es tu próximo gran plan en la vida?",
-        "answer": "Mi próximo gran plan es iniciar un proyecto de emprendimiento en el sector de la tecnología y seguir desarrollando mi carrera profesional."
-      },
-      {
-        "position": 3,
-        "question": "¿Cuáles son tus ingresos mensuales y fuentes de ingreso (salario, inversiones, negocios, etc.)?",
-        "answer": "Mi principal fuente de ingresos es mi salario, complementado con rendimientos de inversiones y ganancias de un pequeño negocio que tengo."
-      },
-      {
-        "position": 4,
-        "question": "¿Cuáles son tus gastos fijos mensuales (alquiler, servicios, alimentación, etc.)?",
-        "answer": "Mis gastos fijos incluyen el alquiler de mi vivienda, servicios como electricidad y agua, alimentación, transporte y algunos gastos de entretenimiento."
-      },
-      {
-        "position": 5,
-        "question": "¿Tienes deudas (hipotecas, préstamos, tarjetas de crédito)? ¿Cuáles son sus montos y tasas de interés?",
-        "answer": "Tengo una hipoteca para mi casa con una tasa de interés del 3.5%, un préstamo personal con una tasa del 7.0%, y una deuda en mi tarjeta de crédito con una tasa del 15.0%."
-      },
-      {
-        "position": 6,
-        "question": "¿Cuáles son tus metas financieras a corto plazo (menos de 1 año)?",
-        "answer": "A corto plazo, mi objetivo es ahorrar para unas vacaciones en la playa y comprar un nuevo ordenador para mi trabajo."
-      },
-      {
-        "position": 7,
-        "question": "¿Cuáles son tus metas financieras a largo plazo (más de 5 años)?",
-        "answer": "A largo plazo, quiero comprar una casa propia y asegurar una jubilación cómoda con un fondo de ahorro considerable."
-      },
-      {
-        "position": 8,
-        "question": "¿Tienes un plan para la jubilación? ¿Cómo estás ahorrando para ello?",
-        "answer": "Sí, tengo un plan de jubilación mediante un fondo de pensiones. Estoy ahorrando a través de aportaciones regulares de mi salario y también contribuyo a una cuenta de ahorros para la jubilación."
-      },
-      {
-        "position": 9,
-        "question": "¿Cómo te sientes respecto a tomar riesgos con inversiones?",
-        "answer": "Me siento cómodo tomando un riesgo moderado con mis inversiones. Busco un equilibrio entre rentabilidad y seguridad."
-      },
-      {
-        "position": 10,
-        "question": "¿Tienes un fondo de emergencia? ¿De cuánto es?",
-        "answer": "Sí, tengo un fondo de emergencia que cubre aproximadamente tres meses de gastos esenciales."
-      },
-      {
-        "position": 11,
-        "question": "¿Qué porcentaje de tus ingresos te gustaría destinar al ahorro o a las inversiones?",
-        "answer": "Me gustaría destinar alrededor del 20% de mis ingresos al ahorro y un 15% adicional a inversiones para asegurar un crecimiento a largo plazo."
-      }
-      
-    ]
-  }
-  
+  "form_data": [
+    {
+      "position": 0,
+      "question": "¿Cuántos años tienes?",
+      "answer": "Tengo 35 años."
+    },
+    {
+      "position": 1,
+      "question": "¿Cuándo planeas jubilarte?",
+      "answer": "Planeo jubilarme alrededor de los 65 años."
+    },
+    {
+      "position": 2,
+      "question": "¿Cuál es tu próximo gran plan en la vida?",
+      "answer": "Mi próximo gran plan es iniciar un proyecto de emprendimiento en el sector de la tecnología y seguir desarrollando mi carrera profesional."
+    },
+    {
+      "position": 3,
+      "question": "¿Cuáles son tus ingresos mensuales y fuentes de ingreso (salario, inversiones, negocios, etc.)?",
+      "answer": "Mi principal fuente de ingresos es mi salario, complementado con rendimientos de inversiones y ganancias de un pequeño negocio que tengo."
+    },
+    {
+      "position": 4,
+      "question": "¿Cuáles son tus gastos fijos mensuales (alquiler, servicios, alimentación, etc.)?",
+      "answer": "Mis gastos fijos incluyen el alquiler de mi vivienda, servicios como electricidad y agua, alimentación, transporte y algunos gastos de entretenimiento."
+    },
+    {
+      "position": 5,
+      "question": "¿Tienes deudas (hipotecas, préstamos, tarjetas de crédito)? ¿Cuáles son sus montos y tasas de interés?",
+      "answer": "Tengo una hipoteca para mi casa con una tasa de interés del 3.5%, un préstamo personal con una tasa del 7.0%, y una deuda en mi tarjeta de crédito con una tasa del 15.0%."
+    },
+    {
+      "position": 6,
+      "question": "¿Cuáles son tus metas financieras a corto plazo (menos de 1 año)?",
+      "answer": "A corto plazo, mi objetivo es ahorrar para unas vacaciones en la playa y comprar un nuevo ordenador para mi trabajo."
+    },
+    {
+      "position": 7,
+      "question": "¿Cuáles son tus metas financieras a largo plazo (más de 5 años)?",
+      "answer": "A largo plazo, quiero comprar una casa propia y asegurar una jubilación cómoda con un fondo de ahorro considerable."
+    },
+    {
+      "position": 8,
+      "question": "¿Tienes un plan para la jubilación? ¿Cómo estás ahorrando para ello?",
+      "answer": "Sí, tengo un plan de jubilación mediante un fondo de pensiones. Estoy ahorrando a través de aportaciones regulares de mi salario y también contribuyo a una cuenta de ahorros para la jubilación."
+    },
+    {
+      "position": 9,
+      "question": "¿Cómo te sientes respecto a tomar riesgos con inversiones?",
+      "answer": "Me siento cómodo tomando un riesgo moderado con mis inversiones. Busco un equilibrio entre rentabilidad y seguridad."
+    },
+    {
+      "position": 10,
+      "question": "¿Tienes un fondo de emergencia? ¿De cuánto es?",
+      "answer": "Sí, tengo un fondo de emergencia que cubre aproximadamente tres meses de gastos esenciales."
+    },
+    {
+      "position": 11,
+      "question": "¿Qué porcentaje de tus ingresos te gustaría destinar al ahorro o a las inversiones?",
+      "answer": "Me gustaría destinar alrededor del 20% de mis ingresos al ahorro y un 15% adicional a inversiones para asegurar un crecimiento a largo plazo."
+    }
+  ]
+}

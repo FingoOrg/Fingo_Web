@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import NodeRoad from '../components/NodeRoad';
 import ProgressBar from '../components/ProgressBar';
 import { NodeInfo } from '../constants/types';
+import FormPath from '../screens/FormPath';
 
 const Road = () => {
   const nodes: NodeInfo[] = [
@@ -96,10 +98,25 @@ const Road = () => {
     },
   ];
 
+  const [showChat, setShowChat] = useState<boolean>(true);
+
+  useEffect(() => {
+    const chatAlreadyAnswered = localStorage.getItem('chatAlreadyAnswered');
+    if (chatAlreadyAnswered && chatAlreadyAnswered === 'true') {
+      setShowChat(false);
+    }
+  }, []);
+
   return (
     <>
-      <ProgressBar progress={50} />
-      <NodeRoad nodes={nodes} />
+      {showChat ? (
+        <FormPath />
+      ) : (
+        <>
+          <ProgressBar progress={50} />
+          <NodeRoad nodes={nodes} />
+        </>
+      )}
     </>
   );
 };
