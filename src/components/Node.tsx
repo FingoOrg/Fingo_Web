@@ -24,9 +24,13 @@ const Node = ({ node }: { node: Plan }) => {
 
   const icon = getIcon();
   const clickable = () => {
-    const firstNotCompleted = data.data
-      .find((item) => item.path_id === data.activePath)
-      ?.bedrock_response.find((item) => !item.status) as Plan;
+    const pathItem = data.data.find((item) => item.path_id === data.activePath);
+
+    // Verificamos si bedrock_response es un arreglo antes de usar .find()
+    const firstNotCompleted = Array.isArray(pathItem?.bedrock_response)
+      ? pathItem?.bedrock_response.find((item) => !item.status) as Plan
+      : undefined;
+
     if (
       (firstNotCompleted && firstNotCompleted.id === node.id) ||
       node.status
@@ -36,6 +40,7 @@ const Node = ({ node }: { node: Plan }) => {
 
     return false;
   };
+
 
   const shouldDisable = !clickable();
 
