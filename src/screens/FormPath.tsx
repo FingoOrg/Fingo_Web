@@ -109,7 +109,7 @@ function FormPath() {
 
     // Simula una solicitud POST (coloca aquí tu llamada real a sendPostRequest)
     sendPostRequest(formData)
-      .then((response) => {
+      .then(() => {
         // Maneja la respuesta si es necesario
         localStorage.setItem('chatAlreadyAnswered', 'true');
       })

@@ -6,7 +6,6 @@ import App from './App';
 import Road from './routes/Road';
 import Chat from './routes/Chat';
 import Profile from './routes/Profile';
-import Home from './routes/Home';
 
 const router = createBrowserRouter([
   {
