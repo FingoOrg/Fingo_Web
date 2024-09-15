@@ -1,9 +1,13 @@
-import { Dispatch, SetStateAction } from "react";
-import { API, APIResponse, UserDataResponse } from "../constants/types";
+import { Dispatch, SetStateAction } from 'react';
+import { API, APIResponse, UserDataResponse } from '../constants/types';
 
-export const fetchUserData = async (setData?: Dispatch<SetStateAction<UserDataResponse>>): Promise<UserDataResponse | null> => {
+export const fetchUserData = async (
+  setData?: Dispatch<SetStateAction<UserDataResponse>>,
+): Promise<UserDataResponse | null> => {
   try {
-    const res = await fetch("https://da5cms9i64.execute-api.us-west-2.amazonaws.com/dev/api/personal-plan");
+    const res = await fetch(
+      'https://da5cms9i64.execute-api.us-west-2.amazonaws.com/dev/api/personal-plan',
+    );
     if (!res.ok) {
       throw new Error('Network response was not ok');
     }
@@ -35,7 +39,6 @@ export const fetchUserData = async (setData?: Dispatch<SetStateAction<UserDataRe
     }
 
     return parsedBody; // Return the parsed data
-
   } catch (error) {
     console.error('Error fetching or parsing data:', error);
     return null; // Return null if there's an error

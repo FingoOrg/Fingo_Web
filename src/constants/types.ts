@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export type Route = {
   path: string;
@@ -53,8 +53,8 @@ export type UserDataResponse = {
   status: string;
   data: API[];
   amounts: {
-    investment_total: number,
-    savings_total: number,
+    investment_total: number;
+    savings_total: number;
   };
   activePath: string;
 };
@@ -63,14 +63,13 @@ export type APIResponse = {
   statusCode: number;
   body: string;
   amounts: {
-    investment_total: number,
-    savings_total: number,
+    investment_total: number;
+    savings_total: number;
   };
 };
 
 // Context Type for userContext
 export type UserContextType = {
   setData: Dispatch<SetStateAction<UserDataResponse>>;
-  data: UserDataResponse
+  data: UserDataResponse;
 };
-

@@ -4,13 +4,17 @@ const ProgressBar = ({ progress }: { progress: number }) => {
   // 100% is the full length of the circle, 2 * PI * r for the circumference of a circle
   const radius = 16;
   const circumference = 2 * Math.PI * radius;
-  
+
   // Calculate the dash offset based on percentage
   const dashOffset = circumference - (porcentaje / 100) * circumference;
 
   return (
     <div className="relative size-16">
-      <svg className="size-full -rotate-90" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        className="size-full -rotate-90"
+        viewBox="0 0 36 36"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <circle
           cx="18"
           cy="18"
@@ -33,7 +37,9 @@ const ProgressBar = ({ progress }: { progress: number }) => {
       </svg>
 
       <div className="absolute top-1/2 start-1/2 transform -translate-y-1/2 -translate-x-1/2">
-        <span className="text-center text-xl font-bold text-primary">{porcentaje}%</span>
+        <span className="text-center text-xl font-bold text-primary">
+          {porcentaje}%
+        </span>
       </div>
     </div>
   );
