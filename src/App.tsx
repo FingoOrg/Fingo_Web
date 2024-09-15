@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import FormPath from './screens/FormPath'
 
 
 const App = () => {

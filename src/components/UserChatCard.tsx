@@ -1,24 +1,35 @@
 
 
 
-function UserChatCard() {
+const UserChatCard: React.FC<{
+    message: string;
+
+}> = ({ message, }) => {
     return (
-        <div className="flex gap-2.5 justify-end pb-40">
-            <div className="">
-                <div className="grid mb-2">
-                    <h5 className="text-right text-gray-900 text-sm font-semibold leading-snug pb-1">You</h5>
-                    <div className="px-3 py-2 bg-indigo-600 rounded">
-                        <h2 className="text-white text-sm font-normal leading-snug">Yes, let’s see, send your work here</h2>
-                    </div>
-                    <div className="justify-start items-center inline-flex">
-                        <h3 className="text-gray-500 text-xs font-normal leading-4 py-1">05:14 PM</h3>
-                    </div>
+
+
+
+        <div className="col-start-6 col-end-13 p-3 rounded-lg">
+            <div className="flex items-center justify-start flex-row-reverse">
+                <div
+                    className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                >
+                    <img
+                        src="./src/assets/user.jpg"
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                    />
                 </div>
 
+                <div className="inline-block max-w-full relative ml-3 text-sm  py-2 px-4 shadow rounded-xl  break-words bg-secondary text-black">
+                    {message}
+                </div>
+
+
             </div>
-            <img src="https://pagedone.io/asset/uploads/1704091591.png" alt="Hailey image" className="w-10 h-11" />
         </div>
+
     );
 }
 
-export default UserChatCard
+export default UserChatCard;
