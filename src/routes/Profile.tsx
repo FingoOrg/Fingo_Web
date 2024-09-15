@@ -5,7 +5,7 @@ import Badge from '../components/Badge';
 import { userContext } from '../context/UserContext';
 
 import GoldMedalIcon from '../components/GoldMedalIcon';
-import Axy from '../../public/assets/Axy.webp';
+import Axy from '../assets/Axy.webp';
 
 const Profile = () => {
   const { data } = useContext(userContext);
