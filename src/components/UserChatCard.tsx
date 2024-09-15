@@ -1,3 +1,5 @@
+import userlogo from "../assets/user.jpg"
+
 const UserChatCard: React.FC<{
   message: string;
 }> = ({ message }) => {
@@ -6,7 +8,7 @@ const UserChatCard: React.FC<{
       <div className="flex items-center justify-start flex-row-reverse">
         <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
           <img
-            src="./assets/user.jpg"
+            src={userlogo}
             alt="Profile"
             className="w-full h-full object-cover rounded-full"
           />
