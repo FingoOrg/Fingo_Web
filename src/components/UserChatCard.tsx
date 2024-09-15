@@ -3,8 +3,8 @@
 
 const UserChatCard: React.FC<{
     message: string;
-    imageUrl: string;
-}> = ({ message, imageUrl }) => {
+
+}> = ({ message, }) => {
     return (
 
 
@@ -15,16 +15,17 @@ const UserChatCard: React.FC<{
                     className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
                 >
                     <img
-                        src={imageUrl}
+                        src="./src/assets/user.jpg"
                         alt="Profile"
                         className="w-full h-full object-cover"
                     />
                 </div>
-                <div
-                    className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                >
-                    <div>{message}</div>
+
+                <div className="inline-block max-w-full relative ml-3 text-sm  py-2 px-4 shadow rounded-xl  break-words bg-secondary text-black">
+                    {message}
                 </div>
+
+
             </div>
         </div>
 

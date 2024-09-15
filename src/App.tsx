@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import FormPath from './screens/FormPath'
+
 import './App.css'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <FormPath></FormPath>
+
     </>
   )
 }
