@@ -5,7 +5,7 @@ import {
   DialogPanel,
 } from '@headlessui/react';
 import {  Plan } from '../constants/types';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { userContext } from '../context/UserContext';
 import { updateFrontData } from '../services/updateFrontData';
 
@@ -23,6 +23,8 @@ const NodeDialog = ({
 
   const isCompleted = node.status;
   const {data, setData } = useContext(userContext)
+  const [showEventuality, setShowEventuality] = useState<boolean>(false)
+
   const handleComplete = async () => {
     try {
       const reqData = {
@@ -54,16 +56,83 @@ const NodeDialog = ({
 }
   }
 
+  const handleCompleteEventuality = async () => {
+    // Add API CALL
+  }
+
+  const handleClose = () => {
+    close()
+    setShowEventuality(false)
+  }
+
+  if(showEventuality) {
+    return (
+      <Dialog
+      transition
+      open={isOpen}
+      as="div"
+      className="relative z-50 focus:outline-none"
+      onClose={handleClose}
+    >
+      <DialogBackdrop className="fixed inset-0 bg-black/30" />
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="flex min-h-full items-center justify-center p-1">
+          <DialogPanel
+            transition
+            className="w-full max-w-md rounded-xl flex flex-col items-center bg-white p-4 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+          >
+            <p className="text-black text-xl font-bold text-center ">Register Eventuality</p>
+            <p className='text-sm text-black me-auto mt-4'>
+              Description:
+            </p>
+            <textarea
+              className="w-full h-24 rounded-md border border-black p-2 mt-2"
+              />
+            <p className='text-sm text-black me-auto mt-4'>
+              Amount Spent:
+            </p>
+            <div className="flex flex-row justify-center text-black text-3xl font-medium mt-4 w-full gap-1">
+              $
+            <input
+              type="number"
+              placeholder='000'
+              className="placeholder-black bg-transparent placeholder:text-center text-center outline-none focus:outline-none max-w-[10ch]"
+              />
+              MXN
+            </div>
+
+
+            <div className="mt-10 flex flex-row justify-between w-full px-5 gap-4">
+              
+                <Button
+                  className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                  onClick={() => setShowEventuality(false)}
+                >
+                  Back
+                </Button>
+              <Button
+                className={`items-center w-full rounded-md bg-red-700 py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700`}
+                onClick={handleCompleteEventuality}
+              >
+                Register
+              </Button>
+            </div>
+          </DialogPanel>
+        </div>
+      </div>
+    </Dialog>
+    )
+  }
+
   return (
       <Dialog
         transition
         open={isOpen}
         as="div"
         className="relative z-50 focus:outline-none"
-        onClose={close}
+        onClose={handleClose}
       >
         <DialogBackdrop className="fixed inset-0 bg-black/30" />
-
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-1">
             <DialogPanel
@@ -89,9 +158,9 @@ const NodeDialog = ({
                 {!isCompleted && (
                   <Button
                     className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                    onClick={close}
+                    onClick={() => setShowEventuality(true)}
                   >
-                    Close
+                    3 | Eventuality
                   </Button>
                 )}
                 <Button
@@ -99,7 +168,7 @@ const NodeDialog = ({
                   onClick={handleComplete}
                   disabled={shouldDisable || isCompleted}
                 >
-                  Complete
+                  Complete{isCompleted && 'd'}
                 </Button>
               </div>
             </DialogPanel>

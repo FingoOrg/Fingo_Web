@@ -5,7 +5,6 @@ import FormPath from '../screens/FormPath';
 import { userContext } from '../context/UserContext';
 import ChoosePath from '../components/ChoosePath';
 
-
 const Road = () => {
   const [showChat, setShowChat] = useState<boolean>(true);
 
@@ -16,8 +15,10 @@ const Road = () => {
     }
   }, [localStorage.getItem('chatAlreadyAnswered')]);
 
-  const { data } = useContext(userContext)
-  const nodes = data.data.find((item) => item.path_id === data.activePath)?.bedrock_response as Plan[] || []
+  const { data } = useContext(userContext);
+  const nodes =
+    (data.data.find((item) => item.path_id === data.activePath)
+      ?.bedrock_response as Plan[]) || [];
 
   return (
     <>
