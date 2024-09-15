@@ -105,7 +105,7 @@ const Road = () => {
     if (chatAlreadyAnswered && chatAlreadyAnswered === 'true') {
       setShowChat(false);
     }
-  }, []);
+  }, [localStorage.getItem('chatAlreadyAnswered')]);
 
   return (
     <>

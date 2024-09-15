@@ -21,9 +21,27 @@ function FormPath() {
   const [chatMessages, setChatMessages] = useState([
     { type: 'bot', message: questions['1'] },
   ]);
+    const initialFormData = {
+        form_data: [
+            { position: 0, question: questions[1], answer: "" },
+            { position: 1, question: questions[2], answer: "" },
+            { position: 2, question: questions[3], answer: "" },
+            { position: 3, question: questions[4], answer: "" },
+            { position: 4, question: questions[5], answer: "" },
+            { position: 5, question: questions[6], answer: "" },
+            { position: 6, question: questions[7], answer: "" },
+            { position: 7, question: questions[8], answer: "" },
+            { position: 8, question: questions[9], answer: "" },
+            { position: 9, question: questions[10], answer: "" },
+            { position: 10, question: questions[11], answer: "" },
+
+        ]
+    };
 
   const [newMessage, setNewMessage] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(2); // Empezamos desde la segunda pregunta
+  const [formData, setFormData] = useState(initialFormData);
+
   const chatRef = useRef<HTMLDivElement>(null);
 
   const scrollBottomChat = () => {
@@ -33,30 +51,37 @@ function FormPath() {
   const handleAddMessage = (e: FormEvent) => {
     e.preventDefault();
     if (newMessage.trim()) {
-      // Agregar mensaje del usuario a la lista
-      setChatMessages([...chatMessages, { type: 'user', message: newMessage }]);
+        const updatedFormData = { ...formData };
+        updatedFormData.form_data[currentQuestion - 2].answer = newMessage;
 
-      // Limpiar el campo de entrada
-      setNewMessage('');
 
-      // Verificar si hay más preguntas
-      if (currentQuestion <= Object.keys(questions).length) {
-        // Agregar la siguiente pregunta del bot
-        setTimeout(() => {
-          setChatMessages((prevMessages) => [
-            ...prevMessages,
-            { type: 'bot', message: questions[currentQuestion] },
-          ]);
-          setCurrentQuestion(currentQuestion + 1); // Avanzar a la siguiente pregunta
-        }, 500); // Simula un pequeño retraso para la respuesta del bot
-      } else {
-        // Si no hay más preguntas, puedes manejar la lógica de fin de preguntas
-        setChatMessages((prevMessages) => [
-          ...prevMessages,
-          { type: 'button', message: 'Generate Path' },
-        ]);
-      }
+        // Actualizar el estado del formData
+        setFormData(updatedFormData);
+        setChatMessages([...chatMessages, { type: 'user', message: newMessage }]);
+
+        // Limpiar el campo de entrada
+        setNewMessage('');
+
+
+        // Verificar si hay más preguntas
+        if (currentQuestion <= Object.keys(questions).length) {
+            // Agregar la siguiente pregunta del bot
+            setTimeout(() => {
+                setChatMessages(prevMessages => [
+                    ...prevMessages,
+                    { type: 'bot', message: questions[currentQuestion] }
+                ]);
+                setCurrentQuestion(currentQuestion + 1); // Avanzar a la siguiente pregunta
+            }, 500); // Simula un pequeño retraso para la respuesta del bot
+        } else {
+            // Si no hay más preguntas, puedes manejar la lógica de fin de preguntas
+            setChatMessages(prevMessages => [
+                ...prevMessages,
+                { type: 'button', message: "Generar Path" }
+            ]);
+        }
     }
+
     localStorage.setItem(
       'chatMessages',
       JSON.stringify([
@@ -66,7 +91,9 @@ function FormPath() {
       ]),
     );
     scrollBottomChat();
-  };
+
+};
+
 
   useEffect(() => {
     const chatMessages = localStorage.getItem('chatMessages');
@@ -83,7 +110,7 @@ function FormPath() {
   }, []);
 
   const handleGeneratePath = () => {
-    sendPostRequest();
+    sendPostRequest(formData);
     localStorage.setItem('chatAlreadyAnswered', 'true');
   };
 
@@ -142,9 +169,9 @@ function FormPath() {
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap='round'
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
               ></path>
             </svg>
