@@ -8,6 +8,7 @@ import {  Plan } from '../constants/types';
 import { useContext, useState } from 'react';
 import { userContext } from '../context/UserContext';
 import { updateFrontData } from '../services/updateFrontData';
+import Loader from './Loader';
 
 const NodeDialog = ({
   isOpen,
@@ -24,8 +25,12 @@ const NodeDialog = ({
   const isCompleted = node.status;
   const {data, setData } = useContext(userContext)
   const [showEventuality, setShowEventuality] = useState<boolean>(false)
+  const [amount, setAmount] = useState<number>(0)
+  const [description, setDescription] = useState<string>('')
+  const [isLoading, setLoading] = useState<boolean>(false)
 
   const handleComplete = async () => {
+    setLoading(true)
     try {
       const reqData = {
         'completed_id': node.id,
@@ -50,14 +55,45 @@ const NodeDialog = ({
   }
 
   const responseData = await apiResponse.json();
-  console.log('Success:', responseData);
+  const newPath: Plan[] = JSON.parse(responseData.bedrock_response)
+  console.log('Success:', newPath);
+  setLoading(false)
 } catch (error) {
   console.error('Error:', error);
 }
   }
 
   const handleCompleteEventuality = async () => {
-    // Add API CALL
+  
+    const currentPath = data.data.find((item) => item.path_id === data.activePath)
+    console.log(currentPath)
+      const eventualityJSON = {
+          amount: amount,
+          eventuality_description: description,
+          path_info:  currentPath
+      }
+
+      const apiResponse = await fetch('https://da5cms9i64.execute-api.us-west-2.amazonaws.com/dev/api/eventuality', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventualityJSON) // Convierte el objeto data a una cadena JSON
+    });
+
+    if(apiResponse.status === 200) {
+      await updateFrontData(setData, data)
+      handleClose()
+    }
+
+    const responseData = await apiResponse.json();
+    console.log(JSON.parse(responseData.body))
+    console.log('Success:', responseData);
+/*     const changedPaths = data.data;
+    let currentPathLocal = changedPaths.find((item) => item.path_id === data.activePath)
+    currentPathLocal = parseData.bedrock_response
+ */
+  ///    setData({...data, data: {...}})
   }
 
   const handleClose = () => {
@@ -87,6 +123,8 @@ const NodeDialog = ({
             </p>
             <textarea
               className="w-full h-24 rounded-md border border-black p-2 mt-2"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
               />
             <p className='text-sm text-black me-auto mt-4'>
               Amount Spent:
@@ -96,6 +134,8 @@ const NodeDialog = ({
             <input
               type="number"
               placeholder='000'
+              value={amount}
+              onChange={(e) => setAmount(parseInt(e.target.value))}
               className="placeholder-black bg-transparent placeholder:text-center text-center outline-none focus:outline-none max-w-[10ch]"
               />
               MXN
@@ -103,19 +143,25 @@ const NodeDialog = ({
 
 
             <div className="mt-10 flex flex-row justify-between w-full px-5 gap-4">
-              
+
+              {isLoading && (<Loader />)}
+              {!isLoading && (
+                <>
+                  <Button
+                    className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                    onClick={() => setShowEventuality(false)}
+                  >
+                    Back
+                  </Button>
                 <Button
-                  className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={() => setShowEventuality(false)}
+                  className={`items-center w-full rounded-md bg-red-700 py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700`}
+                  onClick={handleCompleteEventuality}
                 >
-                  Back
+                  Register
                 </Button>
-              <Button
-                className={`items-center w-full rounded-md bg-red-700 py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700`}
-                onClick={handleCompleteEventuality}
-              >
-                Register
-              </Button>
+                </>
+              )}
+              
             </div>
           </DialogPanel>
         </div>
@@ -155,6 +201,9 @@ const NodeDialog = ({
               {shouldDisable && <p className="mt-2 text-sm/6 text-red-800">Complete the previous steps to unlock this one</p>}
 
               <div className="mt-10 flex flex-row justify-between w-full px-5 gap-4">
+              {isLoading && (<Loader />)}
+              {!isLoading && (
+                <>
                 {!isCompleted && (
                   <Button
                     className="items-center w-full gap-2 rounded-md bg-black py-1.5 px-3 text-md font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
@@ -170,6 +219,8 @@ const NodeDialog = ({
                 >
                   Complete{isCompleted && 'd'}
                 </Button>
+                </>
+              )}
               </div>
             </DialogPanel>
           </div>

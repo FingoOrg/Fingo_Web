@@ -57,6 +57,7 @@ export type UserDataResponse = {
     savings_total: number;
   };
   activePath: string;
+  chatAlreadyAnswered: boolean;
 };
 
 export type APIResponse = {

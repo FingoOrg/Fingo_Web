@@ -24,6 +24,7 @@ export const fetchUserData = async (
       parsedBody.amounts = response.amounts;
     }
 
+
     if (parsedBody.data) {
       parsedBody.data.forEach((item: API) => {
         if (typeof item.bedrock_response === 'string') {
@@ -32,6 +33,7 @@ export const fetchUserData = async (
       });
 
       parsedBody.activePath = parsedBody.data[0].path_id;
+      parsedBody.chatAlreadyAnswered = parsedBody.data[0].form_data && parsedBody.data[0].form_data.length > 0;
     }
 
     if (setData) {

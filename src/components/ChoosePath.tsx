@@ -19,7 +19,7 @@ const ChoosePath = () => {
       nodes.forEach((node) => {
         if (node.status) completeds += 1;
       });
-      return (completeds / nodes.length) * 100;
+      return Math.round((completeds / nodes.length) * 100);
     }
     return 0;
   };

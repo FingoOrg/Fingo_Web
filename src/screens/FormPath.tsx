@@ -2,10 +2,12 @@ import BotChatCard from '../components/BotChatCard';
 import ButtonFormTrack from '../components/buttons/ButtonFormTrack';
 import UserChatCard from '../components/UserChatCard';
 import { sendPostRequest } from '../services/SendForm';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import { FormEvent, useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import logo from "../assets/capifin.jpg"
+import { updateFrontData } from '../services/updateFrontData';
+import { userContext } from '../context/UserContext';
 
 function FormPath() {
   const questions: { [key: number]: string } = {
@@ -45,6 +47,9 @@ function FormPath() {
   const [formData, setFormData] = useState(initialFormData);
   const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
+  const {data, setData} = useContext(userContext)
+
+
   const navigate = useNavigate();
   const scrollBottomChat = () => {
     chatRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -120,7 +125,10 @@ function FormPath() {
       })
       .finally(() => {
         setIsLoading(false);
-        navigate('/'); // Desactiva el estado de carga cuando se completa la solicitud
+        updateFrontData(setData, data);
+        navigate('/')
+        localStorage.removeItem('chatMessages');
+//        navigate('/'); // Desactiva el estado de carga cuando se completa la solicitud
         window.location.reload();
       });
   };

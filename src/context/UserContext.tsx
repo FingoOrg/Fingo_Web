@@ -10,6 +10,7 @@ export const userContext = createContext<UserContextType>({
     },
     data: [],
     status: '',
+    chatAlreadyAnswered: false
   },
   setData: () => {},
 });

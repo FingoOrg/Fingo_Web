@@ -13,6 +13,7 @@ const App = () => {
       savings_total: 0,
     },
     activePath: '',
+    chatAlreadyAnswered: false,
   });
 
   useEffect(() => {

@@ -7,15 +7,14 @@ import ChoosePath from '../components/ChoosePath';
 
 const Road = () => {
   const [showChat, setShowChat] = useState<boolean>(true);
-
+  const {data} = useContext(userContext)
   useEffect(() => {
-    const chatAlreadyAnswered = localStorage.getItem('chatAlreadyAnswered');
-    if (chatAlreadyAnswered && chatAlreadyAnswered === 'true') {
+
+    if (data.chatAlreadyAnswered) {
       setShowChat(false);
     }
-  }, [localStorage.getItem('chatAlreadyAnswered')]);
+  }, [data]);
 
-  const { data } = useContext(userContext);
   const nodes =
     (data.data.find((item) => item.path_id === data.activePath)
       ?.bedrock_response as Plan[]) || [];
