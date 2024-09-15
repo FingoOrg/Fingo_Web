@@ -5,6 +5,8 @@ import { sendPostRequest } from '../services/SendForm';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import logo from "../assets/capifin.jpg"
+
 function FormPath() {
   const questions: { [key: number]: string } = {
     1: '¿Cuántos años tienes?',
@@ -126,7 +128,7 @@ function FormPath() {
     <div className="flex flex-col w-full h-screen justify-end">
       <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
         <img
-          src="./assets/capifin.jpg"
+          src={logo}
           alt="Profile"
           className="w-20 aspect-square object-cover rounded-full"
         />

@@ -1,8 +1,8 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
-import BronzeMedalIcon from '../../public/assets/icons/BronzeMedalIcon';
-import SilverMedalIcon from '../../public/assets/icons/SilverMedalIcon';
+import BronzeMedalIcon from '../assets/icons/BronzeMedalIcon';
+import SilverMedalIcon from '../assets/icons/SilverMedalIcon';
 import GoldMedalIcon from './GoldMedalIcon';
-import TrophyBlueLabelIcon from '../../public/assets/icons/TrophyBlueLabelIcon';
+import TrophyBlueLabelIcon from '../assets/icons/TrophyBlueLabelIcon';
 
 const Badge = ({
   badge,

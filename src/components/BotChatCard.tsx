@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from "../assets/capifin.jpg"
 
 const BotChatCard: React.FC<{
   message: string;
@@ -8,7 +9,7 @@ const BotChatCard: React.FC<{
       <div className="flex flex-row items-end">
         <div className="flex h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
           <img
-            src="./assets/capifin.jpg"
+            src={logo}
             alt="Profile"
             className="w-full h-full object-cover rounded-full"
           />

@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
 import { Plan } from '../constants/types';
 import NodeDialog from './NodeDialog';
-import PiggyPathCompleted from '../../public/assets/icons/PiggyPathCompleted';
-import PiggyPathPending from '../../public/assets/icons/PiggyPathPending';
-import InvestMoneyCompleted from '../../public/assets/icons/InvestMoneyCompleted';
-import InvestMoneyPending from '../../public/assets/icons/InvestMoneyPending';
+import PiggyPathCompleted from '../assets/icons/PiggyPathCompleted';
+import PiggyPathPending from '../assets/icons/PiggyPathPending';
+import InvestMoneyCompleted from '../assets/icons/InvestMoneyCompleted';
+import InvestMoneyPending from '../assets/icons/InvestMoneyPending';
 import { userContext } from '../context/UserContext';
 
 const Node = ({ node }: { node: Plan }) => {
