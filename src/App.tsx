@@ -1,5 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { Outlet } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import FormPath from './screens/FormPath'
+import './App.css'
+
 
 const App = () => {
   return (
