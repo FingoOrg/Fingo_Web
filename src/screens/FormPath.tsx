@@ -80,112 +80,106 @@ function FormPath() {
                     { type: 'button', message: "Generar Path" }
                 ]);
             }
+        }
 
-        };
-
-
-
-    }
-
-
-    localStorage.setItem(
-        'chatMessages',
-        JSON.stringify([
-            ...chatMessages,
-            { type: 'user', message: newMessage },
-            { type: 'bot', message: questions[currentQuestion] },
-        ]),
-    );
-    scrollBottomChat();
-
-};
-
-
-useEffect(() => {
-    const chatMessages = localStorage.getItem('chatMessages');
-    if (chatMessages) {
-        const parsedMessages = JSON.parse(chatMessages);
-        console.log('chatMessages', JSON.parse(chatMessages));
-        const chatBotMessages = parsedMessages.filter(
-            (item: { type: string; message: string }) => item.type === 'bot',
+        localStorage.setItem(
+            'chatMessages',
+            JSON.stringify([
+                ...chatMessages,
+                { type: 'user', message: newMessage },
+                { type: 'bot', message: questions[currentQuestion] },
+            ]),
         );
-        setChatMessages(parsedMessages);
-        setCurrentQuestion(chatBotMessages.length + 1);
-    }
-    scrollBottomChat();
-}, []);
+        scrollBottomChat();
 
-const handleGeneratePath = () => {
-    sendPostRequest(formData);
-    localStorage.setItem('chatAlreadyAnswered', 'true');
-};
+    };
 
-return (
-    <div className="flex flex-col w-full h-screen justify-end">
-        <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
-            <img
-                src="./src/assets/capifin.jpg"
-                alt="Profile"
-                className="w-20 aspect-square object-cover rounded-full"
-            />
-            <div className="flex flex-col ms-3">
-                <p className="text-2xl text-black font-bold">Capyfin Intelligence</p>
-                <p className="text-primary font-medium text-sm">Active now</p>
+
+    useEffect(() => {
+        const chatMessages = localStorage.getItem('chatMessages');
+        if (chatMessages) {
+            const parsedMessages = JSON.parse(chatMessages);
+            console.log('chatMessages', JSON.parse(chatMessages));
+            const chatBotMessages = parsedMessages.filter(
+                (item: { type: string; message: string }) => item.type === 'bot',
+            );
+            setChatMessages(parsedMessages);
+            setCurrentQuestion(chatBotMessages.length + 1);
+        }
+        scrollBottomChat();
+    }, []);
+
+    const handleGeneratePath = () => {
+        sendPostRequest(formData);
+        localStorage.setItem('chatAlreadyAnswered', 'true');
+    };
+
+    return (
+        <div className="flex flex-col w-full h-screen justify-end">
+            <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
+                <img
+                    src="./src/assets/capifin.jpg"
+                    alt="Profile"
+                    className="w-20 aspect-square object-cover rounded-full"
+                />
+                <div className="flex flex-col ms-3">
+                    <p className="text-2xl text-black font-bold">Capyfin Intelligence</p>
+                    <p className="text-primary font-medium text-sm">Active now</p>
+                </div>
+            </article>
+
+            <div className="grid grid-cols-12 w-full max-h-[65dvh] overflow-scroll">
+                {chatMessages.map((item) => {
+                    if (item.type === 'bot') {
+                        return <BotChatCard message={item.message} />;
+                    } else if (item.type === 'button') {
+                        return (
+                            <ButtonFormTrack
+                                label={item.message}
+                                onClick={handleGeneratePath}
+                            />
+                        );
+                    } else {
+                        return <UserChatCard message={item.message} />; // O maneja otros tipos si es necesario
+                    }
+                })}
+                <div ref={chatRef} />
             </div>
-        </article>
-
-        <div className="grid grid-cols-12 w-full max-h-[65dvh] overflow-scroll">
-            {chatMessages.map((item) => {
-                if (item.type === 'bot') {
-                    return <BotChatCard message={item.message} />;
-                } else if (item.type === 'button') {
-                    return (
-                        <ButtonFormTrack
-                            label={item.message}
-                            onClick={handleGeneratePath}
-                        />
-                    );
-                } else {
-                    return <UserChatCard message={item.message} />; // O maneja otros tipos si es necesario
-                }
-            })}
-            <div ref={chatRef} />
-        </div>
-        <form
-            onSubmit={handleAddMessage}
-            className="flex self-end flex-row items-center h-[8dvh] rounded-xl w-full "
-        >
-            <input
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                className="flex w-full border-none  rounded-full focus:outline-none focus:border-indigo-300 pl-4 h-10 bg-white shadow-xl"
-            />
-
-            <button
-                disabled={false}
-                type="submit"
-                className="flex items-center justify-center bg-white hover:bg-gray-200 active:bg-gray-300 rounded-xl text-black px-4 py-2 flex-shrink-0 h-10 shadow-xl transition-colors duration-150 ml-4"
+            <form
+                onSubmit={handleAddMessage}
+                className="flex self-end flex-row items-center h-[8dvh] rounded-xl w-full "
             >
-                <span className="ml-2">
-                    <svg
-                        className="w-6 h-6 transform rotate-45 -mt-px"
-                        fill="none"
-                        stroke="black"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            strokeLinecap='round'
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                        ></path>
-                    </svg>
-                </span>
-            </button>
-        </form>
-    </div>
-);
+                <input
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    className="flex w-full border-none  rounded-full focus:outline-none focus:border-indigo-300 pl-4 h-10 bg-white shadow-xl"
+                />
+
+                <button
+                    disabled={false}
+                    type="submit"
+                    className="flex items-center justify-center bg-white hover:bg-gray-200 active:bg-gray-300 rounded-xl text-black px-4 py-2 flex-shrink-0 h-10 shadow-xl transition-colors duration-150 ml-4"
+                >
+                    <span className="ml-2">
+                        <svg
+                            className="w-6 h-6 transform rotate-45 -mt-px"
+                            fill="none"
+                            stroke="black"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                strokeLinecap='round'
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                            ></path>
+                        </svg>
+                    </span>
+                </button>
+            </form>
+        </div>
+    );
 }
 
 export default FormPath;

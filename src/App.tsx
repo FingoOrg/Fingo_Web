@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 const App = () => {
   return (
     <main className="h-[100dvh] bg-secondary">
-      <div className="h-[90dvh] flex flex-col p-4 pb-0 items-center overflow-scroll">
+      <div className="h-[90dvh] flex flex-col p-4 pb-0  overflow-scroll">
         <Outlet />
       </div>
       <Navbar />

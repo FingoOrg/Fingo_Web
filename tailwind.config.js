@@ -3,6 +3,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      zIndex: {
+        '-10': '-10',
+      },
       colors: {
         primary: '#228B22',
         secondary: '#F5F5DC',
