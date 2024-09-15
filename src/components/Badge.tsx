@@ -14,7 +14,7 @@ const Badge = ({badge} : {badge: {title:string, type:string, description: string
         return <SilverMedalIcon />
       case 'gold-medal':
         return <GoldMedalIcon />
-      case 'trophy':
+      case 'platinum-trophy':
         return <TrophyBlueLabelIcon />
         default:
           return null

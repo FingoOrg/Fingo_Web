@@ -81,7 +81,7 @@ function FormPath() {
                 ]);
             }
         }
-    }
+    
 
     localStorage.setItem(
       'chatMessages',
@@ -129,19 +129,20 @@ function FormPath() {
       </article>
 
       <div className="grid grid-cols-12 w-full max-h-[65dvh] overflow-scroll">
-        {chatMessages.map((item) => {
+        {chatMessages.map((item, index) => {
           if (item.type === 'bot') {
-            return <BotChatCard message={item.message} />;
+            return <BotChatCard key={index} message={item.message} />;
           } else if (item.type === 'button') {
             return (
               <ButtonFormTrack
+              key={index}
                 label={item.message}
                 onClick={handleGeneratePath}
               />
 
                         );
                     } else {
-                        return <UserChatCard message={item.message} />; // O maneja otros tipos si es necesario
+                        return <UserChatCard key={index} message={item.message} />; // O maneja otros tipos si es necesario
                     }
                 })}
                 <div ref={chatRef} />

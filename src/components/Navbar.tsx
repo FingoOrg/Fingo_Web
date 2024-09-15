@@ -3,13 +3,8 @@ import { Route } from '../constants/types';
 const Navbar = () => {
   const routes: Route[] = [
     {
-      name: 'Home',
-      path: '/',
-      icon: 'fi fi-rr-home',
-    },
-    {
       name: 'Road',
-      path: '/road',
+      path: '/',
       icon: 'fi fi-rr-road',
     },
     {
@@ -31,7 +26,7 @@ const Navbar = () => {
           key={index}
           to={route.path}
           className={({ isActive }) =>
-            `${isActive ? 'text-accent -translate-y-4 p-4 shadow-inner-lg' : 'text-gray-400 p-2'} bg-white rounded-full flex flex-col items-center justify-center transition-all delay-75 mx-2 text-lg font-semibold hover:text-accent/80`
+            `${isActive ? 'text-primary -translate-y-4 p-4 shadow-inner-lg' : 'text-gray-400 p-2'} bg-white z-50 rounded-full flex flex-col items-center justify-center transition-all delay-75 mx-2 text-lg font-semibold`
           }
         >
           <>
