@@ -1,14 +1,16 @@
-// api.js
-export const sendPostRequest = async () => {
+interface FormDataItem {
+    position: number;
+    question: string;
+    answer: string;
+}
+
+interface FormData {
+    form_data: FormDataItem[];
+}
+
+
+export const sendPostRequest = async (data: FormData) => {
     try {
-        // Lee el archivo JSON desde la carpeta pública
-        const response = await fetch('../src/assets/responseForm.json'); // Ajusta la ruta si es necesario
-        if (!response.ok) {
-            throw new Error('Failed to load JSON file');
-        }
-
-        const data = await response.json();
-
         // Envía los datos a la API
         const apiResponse = await fetch('https://da5cms9i64.execute-api.us-west-2.amazonaws.com/dev/api/personal-plan', {
             method: 'POST',

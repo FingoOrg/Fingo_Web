@@ -9,7 +9,7 @@ const UserChatCard: React.FC<{
 
 
 
-        <div className="col-start-6 col-end-13 p-3 rounded-lg">
+        <div className="col-start-6 col-end-13 p-3">
             <div className="flex items-center justify-start flex-row-reverse">
                 <div
                     className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
@@ -21,11 +21,9 @@ const UserChatCard: React.FC<{
                     />
                 </div>
 
-                <div className="inline-block max-w-full relative ml-3 text-sm  py-2 px-4 shadow rounded-xl  break-words bg-secondary text-black">
+                <div className="inline-block max-w-full relative ml-3 text-sm py-2 px-4 shadow-xl rounded-tl-xl rounded-tr-xl rounded-bl-xl bg-white text-black">
                     {message}
                 </div>
-
-
             </div>
         </div>
 
