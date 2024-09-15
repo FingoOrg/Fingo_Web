@@ -3,6 +3,7 @@ import ButtonFormTrack from '../components/buttons/ButtonFormTrack';
 import UserChatCard from '../components/UserChatCard';
 import { sendPostRequest } from '../services/SendForm';
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function FormPath() {
   const questions: { [key: number]: string } = {
@@ -40,9 +41,9 @@ function FormPath() {
   const [newMessage, setNewMessage] = useState('');
   const [currentQuestion, setCurrentQuestion] = useState(2); // Empezamos desde la segunda pregunta
   const [formData, setFormData] = useState(initialFormData);
-
+  const [isLoading, setIsLoading] = useState(false);
   const chatRef = useRef<HTMLDivElement>(null);
-
+  const navigate = useNavigate();
   const scrollBottomChat = () => {
     chatRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -104,10 +105,23 @@ function FormPath() {
   }, []);
 
   const handleGeneratePath = () => {
-    sendPostRequest(formData);
-    localStorage.setItem('chatAlreadyAnswered', 'true');
-  };
+    setIsLoading(true); // Activa el estado de carga antes de la solicitud
 
+    // Simula una solicitud POST (coloca aquí tu llamada real a sendPostRequest)
+    sendPostRequest(formData)
+      .then((response) => {
+        // Maneja la respuesta si es necesario
+        localStorage.setItem('chatAlreadyAnswered', 'true');
+      })
+      .catch((error) => {
+        console.error('Error al enviar la solicitud:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        navigate('/'); // Desactiva el estado de carga cuando se completa la solicitud
+        window.location.reload();
+      });
+  };
   return (
     <div className="flex flex-col w-full h-screen justify-end">
       <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
@@ -132,6 +146,7 @@ function FormPath() {
                 key={index}
                 label={item.message}
                 onClick={handleGeneratePath}
+                isLoading={isLoading}
               />
             );
           } else {
