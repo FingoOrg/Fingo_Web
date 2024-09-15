@@ -1,5 +1,7 @@
+import FormPath from '../screens/FormPath';
+
 const Chat = () => {
-  return <div>Chat</div>;
+  return <FormPath />;
 };
 
 export default Chat;

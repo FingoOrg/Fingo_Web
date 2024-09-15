@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { Route } from '../constants/types';
-
 const Navbar = () => {
   const routes: Route[] = [
     {

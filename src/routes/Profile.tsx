@@ -4,48 +4,32 @@ import MoneyPigIcon from '../assets/icons/MoneyPigIcon';
 import SilverMedalIcon from '../assets/icons/SilverMedalIcon';
 import TrophyBlueLabelIcon from '../assets/icons/TrophyBlueLabelIcon';
 import TrophyGreenLable from '../assets/icons/TrophyGreenLable';
+import Badge from '../components/Badge';
 import GoldMedalIcon from '../components/GoldMedalIcon';
 
 const Profile = () => {
   const badges = [
     {
       icon: <TrophyBlueLabelIcon />,
+      description: 'First investment',
     },
     {
       icon: <TrophyGreenLable />,
+      description: 'First investment',
     },
     {
       icon: <BronzeMedalIcon />,
+      description: "Bronze Medal"
     },
     {
       icon: <SilverMedalIcon />,
+      description: "Silver Medal"
+
     },
     {
       icon: <GoldMedalIcon />,
-    },
-    {
-      icon: <TrophyGreenLable />,
-    },
-    {
-      icon: <BronzeMedalIcon />,
-    },
-    {
-      icon: <SilverMedalIcon />,
-    },
-    {
-      icon: <GoldMedalIcon />,
-    },
-    {
-      icon: <TrophyGreenLable />,
-    },
-    {
-      icon: <BronzeMedalIcon />,
-    },
-    {
-      icon: <SilverMedalIcon />,
-    },
-    {
-      icon: <GoldMedalIcon />,
+      description: "Gold Medal"
+
     },
   ];
   return (
@@ -73,12 +57,7 @@ const Profile = () => {
         <p className="text-md font-medium self-start">My Badges</p>
         <div className="grid gap-4 grid-cols-3 pt-4 pb-4">
           {badges.map((badge, index) => (
-            <article
-              key={index}
-              className="flex flex-col justify-center aspect-square items-center p-2 rounded-lg bg-white shadow-lg"
-            >
-              {badge.icon}
-            </article>
+            <Badge key={index} badge={badge} />
           ))}
         </div>
       </div>
