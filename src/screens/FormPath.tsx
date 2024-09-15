@@ -91,8 +91,7 @@ function FormPath() {
       ]),
     );
     scrollBottomChat();
-
-};
+  }
 
 
   useEffect(() => {
