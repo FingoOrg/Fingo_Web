@@ -12,7 +12,7 @@ const UserChatCard: React.FC<{
           />
         </div>
 
-        <div className="max-w-full relative ml-3 text-sm py-2 px-4 shadow rounded-xl  break-words bg-secondary text-black">
+        <div className="max-w-full relative ml-3 text-sm py-2 px-4 shadow rounded-xl  break-words bg-white text-black">
           {message}
         </div>
       </div>

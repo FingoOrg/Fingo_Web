@@ -81,63 +81,64 @@ function FormPath() {
                 ]);
             }
         }
+    }
 
-        localStorage.setItem(
-            'chatMessages',
-            JSON.stringify([
-                ...chatMessages,
-                { type: 'user', message: newMessage },
-                { type: 'bot', message: questions[currentQuestion] },
-            ]),
-        );
-        scrollBottomChat();
+    localStorage.setItem(
+      'chatMessages',
+      JSON.stringify([
+        ...chatMessages,
+        { type: 'user', message: newMessage },
+        { type: 'bot', message: questions[currentQuestion] },
+      ]),
+    );
+    scrollBottomChat();
+  }
 
-    };
 
+  useEffect(() => {
+    const chatMessages = localStorage.getItem('chatMessages');
+    if (chatMessages) {
+      const parsedMessages = JSON.parse(chatMessages);
+      console.log('chatMessages', JSON.parse(chatMessages));
+      const chatBotMessages = parsedMessages.filter(
+        (item: { type: string; message: string }) => item.type === 'bot',
+      );
+      setChatMessages(parsedMessages);
+      setCurrentQuestion(chatBotMessages.length + 1);
+    }
+    scrollBottomChat();
+  }, []);
 
-    useEffect(() => {
-        const chatMessages = localStorage.getItem('chatMessages');
-        if (chatMessages) {
-            const parsedMessages = JSON.parse(chatMessages);
-            console.log('chatMessages', JSON.parse(chatMessages));
-            const chatBotMessages = parsedMessages.filter(
-                (item: { type: string; message: string }) => item.type === 'bot',
-            );
-            setChatMessages(parsedMessages);
-            setCurrentQuestion(chatBotMessages.length + 1);
-        }
-        scrollBottomChat();
-    }, []);
+  const handleGeneratePath = () => {
+    sendPostRequest(formData);
+    localStorage.setItem('chatAlreadyAnswered', 'true');
+  };
 
-    const handleGeneratePath = () => {
-        sendPostRequest(formData);
-        localStorage.setItem('chatAlreadyAnswered', 'true');
-    };
+  return (
+    <div className="flex flex-col w-full h-screen justify-end">
+      <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
+        <img
+          src="./src/assets/capifin.jpg"
+          alt="Profile"
+          className="w-20 aspect-square object-cover rounded-full"
+        />
+        <div className="flex flex-col ms-3">
+          <p className="text-2xl text-black font-bold">Capyfin Intelligence</p>
+          <p className="text-primary font-medium text-sm">Active now</p>
+        </div>
+      </article>
 
-    return (
-        <div className="flex flex-col w-full h-screen justify-end">
-            <article className="flex flex-row items-center rounded-3xl shadow-xl bg-white p-3 mb-auto">
-                <img
-                    src="./src/assets/capifin.jpg"
-                    alt="Profile"
-                    className="w-20 aspect-square object-cover rounded-full"
-                />
-                <div className="flex flex-col ms-3">
-                    <p className="text-2xl text-black font-bold">Capyfin Intelligence</p>
-                    <p className="text-primary font-medium text-sm">Active now</p>
-                </div>
-            </article>
+      <div className="grid grid-cols-12 w-full max-h-[65dvh] overflow-scroll">
+        {chatMessages.map((item) => {
+          if (item.type === 'bot') {
+            return <BotChatCard message={item.message} />;
+          } else if (item.type === 'button') {
+            return (
+              <ButtonFormTrack
+                label={item.message}
+                onClick={handleGeneratePath}
+              />
 
-            <div className="grid grid-cols-12 w-full max-h-[65dvh] overflow-scroll">
-                {chatMessages.map((item) => {
-                    if (item.type === 'bot') {
-                        return <BotChatCard message={item.message} />;
-                    } else if (item.type === 'button') {
-                        return (
-                            <ButtonFormTrack
-                                label={item.message}
-                                onClick={handleGeneratePath}
-                            />
                         );
                     } else {
                         return <UserChatCard message={item.message} />; // O maneja otros tipos si es necesario
